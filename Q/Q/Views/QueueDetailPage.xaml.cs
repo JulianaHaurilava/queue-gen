@@ -6,7 +6,7 @@ namespace Q.Views
 {
     public partial class QueueDetailPage : ContentPage
     {
-        QueueDetailViewModel _viewModel;
+        //QueueDetailViewModel _viewModel;
         public QueueDetailPage()
         {
             InitializeComponent();

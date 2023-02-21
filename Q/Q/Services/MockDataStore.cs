@@ -14,12 +14,12 @@ namespace Q.Services
         {
             items = new List<Queue>()
             {
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "First item", Description="This is an item lastName." },
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "Second item", Description="This is an item lastName." },
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "Third item", Description="This is an item lastName." },
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "Fourth item", Description="This is an item lastName." },
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "Fifth item", Description="This is an item lastName." },
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "Sixth item", Description="This is an item lastName." }
+                new Queue { Id = Guid.NewGuid().ToString(), Name = "First item", Type="This is an item lastName." },
+                new Queue { Id = Guid.NewGuid().ToString(), Name = "Second item", Type="This is an item lastName." },
+                new Queue { Id = Guid.NewGuid().ToString(), Name = "Third item", Type="This is an item lastName." },
+                new Queue { Id = Guid.NewGuid().ToString(), Name = "Fourth item", Type="This is an item lastName." },
+                new Queue { Id = Guid.NewGuid().ToString(), Name = "Fifth item", Type="This is an item lastName." },
+                new Queue { Id = Guid.NewGuid().ToString(), Name = "Sixth item", Type="This is an item lastName." }
             };
         }
 

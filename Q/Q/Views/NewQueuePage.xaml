@@ -9,9 +9,15 @@
     <ContentPage.Content>
         <StackLayout Spacing="3" Padding="15">
             <Label Text="Предмет" FontSize="Medium" />
-            <Entry Text="{Binding Text, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="Описание" FontSize="Medium" />
-            <Editor Text="{Binding Description, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+            <Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Принцип сортировки" FontSize="Medium" />
+            <Picker SelectedItem="{Binding Type, Mode=TwoWay}" FontSize="Medium">
+                <Picker.Items>
+                    <x:String>По алфавиту</x:String>
+                    <x:String>По выполненым ЛР</x:String>
+                    <x:String>Рандомно</x:String>
+                </Picker.Items>
+            </Picker>
             <StackLayout Orientation="Horizontal">
                 <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
                 <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>

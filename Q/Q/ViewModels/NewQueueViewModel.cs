@@ -10,8 +10,8 @@ namespace Q.ViewModels
 {
     public class NewQueueViewModel : BaseViewModel
     {
-        private string text;
-        private string description;
+        private string name;
+        private string type;
 
         public NewQueueViewModel()
         {
@@ -23,20 +23,20 @@ namespace Q.ViewModels
 
         private bool ValidateSave()
         {
-            return !String.IsNullOrWhiteSpace(text)
-                && !String.IsNullOrWhiteSpace(description);
+            return !String.IsNullOrWhiteSpace(name)
+                && !String.IsNullOrWhiteSpace(type);
         }
 
-        public string Text
+        public string Name
         {
-            get => text;
-            set => SetProperty(ref text, value);
+            get => name;
+            set => SetProperty(ref name, value);
         }
 
-        public string Description
+        public string Type
         {
-            get => description;
-            set => SetProperty(ref description, value);
+            get => type;
+            set => SetProperty(ref type, value);
         }
 
         public Command SaveCommand { get; }
@@ -53,8 +53,8 @@ namespace Q.ViewModels
             Queue newItem = new Queue()
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = Text,
-                Description = Description
+                Name = Name,
+                Type = Type
             };
 
             await QueueDataStore.AddItemAsync(newItem);
