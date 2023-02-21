@@ -1,6 +1,7 @@
 ﻿using Q.Models;
 using Q.Services;
 using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -11,20 +12,60 @@ namespace Q.ViewModels
     public class QueueDetailViewModel : BaseViewModel
     {
         private string itemId;
-        private string text;
-        private string description;
-        public string Id { get; set; }
 
-        public string Text
+        private string firstName;
+        private string lastName;
+        private int labNumber;
+
+        public ObservableCollection<Student> Items { get; }
+        public Command LoadItemsCommand { get; }
+
+        public QueueDetailViewModel()
         {
-            get => text;
-            set => SetProperty(ref text, value);
+            Title = "Browse";
+            Items = new ObservableCollection<Student>();
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
-        public string Description
+        async Task ExecuteLoadItemsCommand()
         {
-            get => description;
-            set => SetProperty(ref description, value);
+            IsBusy = true;
+
+            try
+            {
+                Items.Clear();
+                var items = await StudentDataStore.GetItemsAsync(true);
+                foreach (var item in items)
+                {
+                    Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        public string Id { get; set; }
+
+        public string FirstName
+        {
+            get => firstName;
+            set => SetProperty(ref firstName, value);
+        }
+        public string LastName
+        {
+            get => lastName;
+            set => SetProperty(ref lastName, value);
+        }
+        public int LabNumber
+        {
+            get => labNumber;
+            set => SetProperty(ref labNumber, value);
         }
 
         public string ItemId
@@ -40,14 +81,20 @@ namespace Q.ViewModels
             }
         }
 
+        //public void OnAppearing()
+        //{
+        //    IsBusy = true;
+        //}
+
         public async void LoadItemId(string itemId)
         {
             try
             {
-                var item = await QueueDataStore.GetItemAsync(itemId);
+                var item = await StudentDataStore.GetItemAsync(itemId);
                 Id = item.Id;
-                Text = item.Name;
-                Description = item.Description;
+                LastName = item.LastName;
+                FirstName = item.FirstName;
+                LabNumber= item.LabNumber;
             }
             catch (Exception)
             {
