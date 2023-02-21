@@ -14,6 +14,7 @@ namespace Q
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
+            DependencyService.Register<MockStudentStore>();
             MainPage = new AppShell();
         }
 

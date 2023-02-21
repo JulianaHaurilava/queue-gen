@@ -71,7 +71,7 @@ namespace Q.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewQueuePage));
+            await Shell.Current.GoToAsync(nameof(NewStudentPage));
         }
 
         async void OnItemSelected(Student item)

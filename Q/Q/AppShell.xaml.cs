@@ -13,6 +13,7 @@ namespace Q
             InitializeComponent();
             Routing.RegisterRoute(nameof(QueueDetailPage), typeof(QueueDetailPage));
             Routing.RegisterRoute(nameof(NewQueuePage), typeof(NewQueuePage));
+            Routing.RegisterRoute(nameof(NewStudentPage), typeof(NewStudentPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

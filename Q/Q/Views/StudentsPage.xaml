@@ -25,7 +25,7 @@
                                 </MultiBinding>
                             </Label.Text>
                         </Label>
-                        <Label Text="{Binding labNumber}" 
+                        <Label Text="{Binding LabNumber}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />

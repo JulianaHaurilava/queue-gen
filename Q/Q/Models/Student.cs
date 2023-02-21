@@ -9,7 +9,7 @@ namespace Q.Models
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int labNumber { get; set; }
+        public int LabNumber { get; set; }
 
     }
 }
