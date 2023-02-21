@@ -1,10 +1,11 @@
 ﻿using Q.Models;
-using Q.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Q.ViewModels
 {
@@ -34,15 +35,8 @@ namespace Q.ViewModels
             try
             {
                 var queue = await QueueDataStore.GetItemAsync(itemId);
-
-                switch (queue.Type)
-                {
-                    case "По алфавиту": 
-                }
-
                 Items.Clear();
-                var items = await StudentDataStore.GetItemsAsync(true);
-                foreach (var item in items)
+                foreach (var item in queue.SortedStudents)
                 {
                     Items.Add(item);
                 }

@@ -1,7 +1,9 @@
 ﻿using Q.Models;
 using Q.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -50,12 +52,38 @@ namespace Q.ViewModels
 
         private async void OnSave()
         {
-            Queue newItem = new Queue()
+            Models.Queue newItem = new Models.Queue()
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = Name,
                 Type = Type
             };
+
+            switch (newItem.Type)
+            {
+                case "По алфавиту":
+                    {
+                        newItem.SortedStudents = (await StudentDataStore.GetItemsAsync(true))
+                            .OrderBy(x => x.LastName)
+                            .ThenBy(x => x.FirstName)
+                            .ToList();
+                        break;
+                    }
+                case "По выполненым ЛР":
+                    {
+                        newItem.SortedStudents = (await StudentDataStore.GetItemsAsync(true))
+                            .OrderBy(x => x.LabNumber)
+                            .ToList();
+                        break;
+                    }
+                case "Рандомно":
+                    {
+                        newItem.SortedStudents = (await StudentDataStore.GetItemsAsync(true)).ToList();
+                        break;
+                    }
+            }
+
+            
 
             await QueueDataStore.AddItemAsync(newItem);
 
