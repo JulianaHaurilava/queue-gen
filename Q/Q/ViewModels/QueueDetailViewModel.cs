@@ -33,6 +33,13 @@ namespace Q.ViewModels
 
             try
             {
+                var queue = await QueueDataStore.GetItemAsync(itemId);
+
+                switch (queue.Type)
+                {
+                    case "По алфавиту": 
+                }
+
                 Items.Clear();
                 var items = await StudentDataStore.GetItemsAsync(true);
                 foreach (var item in items)
@@ -51,7 +58,6 @@ namespace Q.ViewModels
         }
 
         public string Id { get; set; }
-
         public string FirstName
         {
             get => firstName;

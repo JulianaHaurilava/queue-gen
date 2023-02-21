@@ -12,15 +12,7 @@ namespace Q.Services
 
         public MockDataStore()
         {
-            items = new List<Queue>()
-            {
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "First item", Type="This is an item lastName." },
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "Second item", Type="This is an item lastName." },
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "Third item", Type="This is an item lastName." },
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "Fourth item", Type="This is an item lastName." },
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "Fifth item", Type="This is an item lastName." },
-                new Queue { Id = Guid.NewGuid().ToString(), Name = "Sixth item", Type="This is an item lastName." }
-            };
+            items = new List<Queue>();
         }
 
         public async Task<bool> AddItemAsync(Queue item)
