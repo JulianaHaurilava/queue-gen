@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Q.ViewModels"
              xmlns:model="clr-namespace:Q.Models"
+             x:DataType="local:QueueDetailViewModel"
              x:Class="Q.Views.QueueDetailPage"
              Title="{Binding Title}">
 
-    <!--<ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
-    </ContentPage.ToolbarItems>-->
-    <RefreshView x:DataType="local:QueueDetailViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding ConfirmStudent}" />
+    </ContentPage.ToolbarItems>
+    
+    <RefreshView x:DataType="local:QueueDetailViewModel" Command="{Binding LoadItemsCommand}"
+                 IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <CollectionView x:Name="SortedStudentsListView"
                 ItemsSource="{Binding Items}"
                 SelectionMode="None">

@@ -1,31 +1,56 @@
-﻿using Q.Models;
+﻿using System;
+using Xamarin.Forms;
+using Q.Models;
 using Q.Views;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
+using System.Collections.Generic;
 
 namespace Q.ViewModels
 {
-    public class StudentsViewModel : BaseViewModel
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    public class ChooseStudentViewModel : BaseViewModel
     {
         private Student _selectedItem;
 
+        private string itemId;
+        public string Id { get; set; }
+        public string ItemId
+        {
+            get
+            {
+                return itemId;
+            }
+            set
+            {
+                itemId = value;
+                LoadItemId(value);
+            }
+        }
+        public async void LoadItemId(string itemId)
+        {
+            try
+            {
+                var item = await QueueDataStore.GetItemAsync(itemId);
+                Id = item.Id;
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Failed to Load Queue");
+            }
+        }
+
         public ObservableCollection<Student> Items { get; }
         public Command LoadItemsCommand { get; }
-        public Command AddItemCommand { get; }
         public Command<Student> ItemTapped { get; }
 
-        public StudentsViewModel()
+        public ChooseStudentViewModel()
         {
-            Title = "Студенты";
+            Title = "Формирование очереди";
             Items = new ObservableCollection<Student>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<Student>(OnItemSelected);
-            AddItemCommand = new Command(OnAddItem);
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -66,19 +91,18 @@ namespace Q.ViewModels
                 OnItemSelected(value);
             }
         }
-
-        private async void OnAddItem(object obj)
-        {
-            await Shell.Current.GoToAsync(nameof(NewStudentPage));
-        }
-
+        
         async void OnItemSelected(Student item)
         {
             if (item == null)
                 return;
 
-            // This will push the QueueDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(QueueDetailPage)}?{nameof(QueueDetailViewModel.ItemId)}={item.Id}");
+            var itemQ = await QueueDataStore.GetItemAsync(itemId);
+            itemQ.SortedStudents.Add(item);
+            await QueueDataStore.UpdateItemAsync(itemQ);
+            await Shell.Current.GoToAsync("..");
+
+            //await Shell.Current.GoToAsync($"{nameof(ConfirmLabPage)}?{nameof(ConfirmLabViewModel.ItemId)}={item.Id}");
         }
     }
 }

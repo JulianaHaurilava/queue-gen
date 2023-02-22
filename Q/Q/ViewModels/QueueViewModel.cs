@@ -1,5 +1,4 @@
 ﻿using Q.Models;
-using Q.Services;
 using Q.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -20,12 +19,10 @@ namespace Q.ViewModels
 
         public QueueViewModel()
         {
-            Title = "Browse";
+            Title = "Очереди";
             Items = new ObservableCollection<Queue>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
             ItemTapped = new Command<Queue>(OnItemSelected);
-
             AddItemCommand = new Command(OnAddItem);
         }
 
@@ -78,7 +75,6 @@ namespace Q.ViewModels
             if (item == null)
                 return;
 
-            // This will push the QueueDetailPage onto the navigation stack
             await Shell.Current.GoToAsync($"{nameof(QueueDetailPage)}?{nameof(QueueDetailViewModel.ItemId)}={item.Id}");
         }
     }

@@ -59,29 +59,29 @@ namespace Q.ViewModels
                 Type = Type
             };
 
-            switch (newItem.Type)
-            {
-                case "По алфавиту":
-                    {
-                        newItem.SortedStudents = (await StudentDataStore.GetItemsAsync(true))
-                            .OrderBy(x => x.LastName)
-                            .ThenBy(x => x.FirstName)
-                            .ToList();
-                        break;
-                    }
-                case "По выполненым ЛР":
-                    {
-                        newItem.SortedStudents = (await StudentDataStore.GetItemsAsync(true))
-                            .OrderBy(x => x.LabNumber)
-                            .ToList();
-                        break;
-                    }
-                case "Рандомно":
-                    {
-                        newItem.SortedStudents = (await StudentDataStore.GetItemsAsync(true)).ToList();
-                        break;
-                    }
-            }
+            //switch (newItem.Type)
+            //{
+            //    case "По алфавиту":
+            //        {
+            //            newItem.SortedStudents = (await StudentDataStore.GetItemsAsync(true))
+            //                .OrderBy(x => x.LastName)
+            //                .ThenBy(x => x.FirstName)
+            //                .ToList();
+            //            break;
+            //        }
+            //    case "По выполненым ЛР":
+            //        {
+            //            newItem.SortedStudents = (await StudentDataStore.GetItemsAsync(true))
+            //                .OrderBy(x => x.LabNumber)
+            //                .ToList();
+            //            break;
+            //        }
+            //    case "Рандомно":
+            //        {
+            //            newItem.SortedStudents = (await StudentDataStore.GetItemsAsync(true)).ToList();
+            //            break;
+            //        }
+            //}
 
             
 
@@ -89,6 +89,7 @@ namespace Q.ViewModels
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
+
         }
     }
 }

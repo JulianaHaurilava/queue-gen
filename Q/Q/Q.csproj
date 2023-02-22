@@ -11,6 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\ConfirmLabPage.xaml.cs">
+      <DependentUpon>ConfirmLabPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ChooseStudentPage.xaml.cs">
+      <DependentUpon>ChooseStudentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\NewQueuePage.xaml.cs">
       <DependentUpon>NewQueuePage.xaml</DependentUpon>
     </Compile>
@@ -23,6 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Views\ConfirmLabPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ChooseStudentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\NewStudentPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

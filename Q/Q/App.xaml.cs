@@ -1,8 +1,5 @@
 ﻿using Q.Services;
-using Q.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Q
 {
