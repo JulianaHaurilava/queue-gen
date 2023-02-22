@@ -14,8 +14,6 @@ namespace Q
             Routing.RegisterRoute(nameof(NewQueuePage), typeof(NewQueuePage));
             Routing.RegisterRoute(nameof(NewStudentPage), typeof(NewStudentPage));
             Routing.RegisterRoute(nameof(ChooseStudentPage), typeof(ChooseStudentPage));
-            Routing.RegisterRoute(nameof(ConfirmLabPage), typeof(ConfirmLabViewModel));
-            Routing.RegisterRoute(nameof(ConfirmLabPage), typeof(ConfirmLabViewModel));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

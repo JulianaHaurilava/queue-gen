@@ -1,11 +1,10 @@
 ﻿using System;
 using Xamarin.Forms;
 using Q.Models;
-using Q.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Q.ViewModels
 {
@@ -99,10 +98,31 @@ namespace Q.ViewModels
 
             var itemQ = await QueueDataStore.GetItemAsync(itemId);
             itemQ.SortedStudents.Add(item);
+
+            switch (itemQ.Type)
+            {
+                case "По алфавиту":
+                    {
+                        itemQ.SortedStudents = (itemQ.SortedStudents)
+                            .OrderBy(x => x.LastName)
+                            .ThenBy(x => x.FirstName)
+                            .ToList();
+                        break;
+                    }
+                case "По выполненым ЛР":
+                    {
+                        itemQ.SortedStudents = (itemQ.SortedStudents)
+                            .OrderBy(x => x.LabNumber)
+                            .ToList();
+                        break;
+                    }
+                case "Рандомно":
+                    {
+                        break;
+                    }
+            }
             await QueueDataStore.UpdateItemAsync(itemQ);
             await Shell.Current.GoToAsync("..");
-
-            //await Shell.Current.GoToAsync($"{nameof(ConfirmLabPage)}?{nameof(ConfirmLabViewModel.ItemId)}={item.Id}");
         }
     }
 }
